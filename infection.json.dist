@@ -1,0 +1,27 @@
+{
+    "$schema": "./vendor/infection/infection/resources/schema.json",
+
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "tmpDir": "dist/infection",
+    "mutators": {
+        "@default": true,
+        "MBString": false,
+        "FalseValue": {
+            "ignore": [
+                "Webmozarts\\StrictPHPUnit\\StrictScalarComparator::assertEquals"
+            ]
+        },
+        "OneZeroFloat": {
+            "ignore": [
+                "Webmozarts\\StrictPHPUnit\\StrictScalarComparator::assertEquals"
+            ]
+        }
+    }
+}

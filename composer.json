@@ -1,0 +1,32 @@
+{
+    "name": "webmozarts/strict-phpunit",
+    "description": "Enables type-safe comparisons of objects in PHPUnit",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bernhard Schussek",
+            "email": "bernhard.schussek@webmozarts.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Webmozarts\\StrictPHPUnit\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Webmozarts\\StrictPHPUnit\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.4.0",
+        "phpunit/phpunit": "^9.4.3"
+    },
+    "require-dev": {
+        "infection/infection": "^0.18|^0.21"
+    }
+}

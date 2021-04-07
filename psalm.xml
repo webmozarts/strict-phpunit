@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<psalm
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config ../../vendor-bin/psalm/vendor/vimeo/psalm/config.xsd"
+        strictBinaryOperands="true"
+        ignoreInternalFunctionFalseReturn="false"
+        ignoreInternalFunctionNullReturn="false"
+        findUnusedVariablesAndParams="true"
+        findUnusedCode="true"
+        findUnusedPsalmSuppress="true"
+        ensureArrayStringOffsetsExist="true"
+        ensureArrayIntOffsetsExist="true"
+        cacheDirectory=".psalm">
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
+    </plugins>
+
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="tests"/>
+    </projectFiles>
+
+    <issueHandlers>
+        <UnusedClass errorLevel="suppress"/>
+        <UnusedConstructor errorLevel="suppress"/>
+        
+        <MissingParamType>
+            <errorLevel type="suppress">
+                <file name="tests/StrictScalarComparatorTest.php"/>
+            </errorLevel>
+        </MissingParamType>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <file name="src/StrictScalarComparator.php"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
+</psalm>
