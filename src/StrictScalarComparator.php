@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit;
 
-use SebastianBergmann\Comparator\ComparisonFailure;
-use SebastianBergmann\Comparator\ScalarComparator;
 use function is_string;
 use function mb_strtolower;
+use SebastianBergmann\Comparator\ComparisonFailure;
+use SebastianBergmann\Comparator\ScalarComparator;
 use function sprintf;
 
 /**

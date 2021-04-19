@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit\Tests;
 
+use function fclose;
+use function fopen;
+use function is_resource;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use stdClass;
 use Webmozarts\StrictPHPUnit\StrictScalarComparator;
-use function fclose;
-use function fopen;
-use function is_resource;
 
 /**
  * @covers \Webmozarts\StrictPHPUnit\StrictScalarComparator
