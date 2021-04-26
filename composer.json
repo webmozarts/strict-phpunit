@@ -28,5 +28,10 @@
     },
     "require-dev": {
         "infection/infection": "^0.18|^0.21"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "7.0.x-dev"
+        }
     }
 }
