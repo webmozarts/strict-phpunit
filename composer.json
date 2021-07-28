@@ -18,6 +18,9 @@
         "infection/infection": "^0.18 || ^0.21"
     },
     "config": {
+        "gitlab-domains": [
+            "gitlab.webmozarts.com"
+        ],
         "sort-packages": true
     },
     "extra": {
