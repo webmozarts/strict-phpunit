@@ -14,7 +14,7 @@
         "phpunit/phpunit": "^9.4.3"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.13",
+        "ergebnis/composer-normalize": "~2.13.0",
         "infection/infection": "^0.18 || ^0.21"
     },
     "config": {
