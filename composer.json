@@ -18,6 +18,10 @@
         "infection/infection": "^0.18 || ^0.21"
     },
     "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true
+        },
         "gitlab-domains": [
             "gitlab.webmozarts.com"
         ],
