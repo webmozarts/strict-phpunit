@@ -1,4 +1,4 @@
 include:
-    -   project: webmozarts/php-libraries
+    -   project: webmozarts/libraries/php-libraries
         ref: main
         file: /.gitlab-ci-library.yml
