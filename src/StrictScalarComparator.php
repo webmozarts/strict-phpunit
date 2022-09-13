@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Webmozarts Strict PHPUnit package.
+ * This file is part of the Webmozarts StrictPHPUnit package.
  *
  * (c) Webmozarts GmbH <office@webmozarts.com>
  *
@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit;
 
-use function is_string;
-use function mb_strtolower;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Comparator\ScalarComparator;
+
+use function is_string;
+use function mb_strtolower;
 use function sprintf;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Webmozarts Strict PHPUnit package.
+ * This file is part of the Webmozarts StrictPHPUnit package.
  *
  * (c) Webmozarts GmbH <office@webmozarts.com>
  *
