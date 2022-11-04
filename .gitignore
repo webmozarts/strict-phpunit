@@ -1,10 +1,10 @@
 /.idea/
-/dist/
-/vendor/
-/.php-cs-fixer.php
 /.php-cs-fixer.cache
+/.php-cs-fixer.php
 /.php_cs.cache
 /.phpunit.result.cache
 /.psalm/
 /composer.lock
+/dist/
 /infection.log
+/vendor/
