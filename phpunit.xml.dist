@@ -4,7 +4,8 @@
          colors="true"
          bootstrap="vendor/autoload.php"
          failOnRisky="true"
-         failOnWarning="true">
+         failOnWarning="true"
+         cacheResultFile="dist/.phpunit.result.cache">
     <php>
         <ini name="error_reporting" value="-1"/>
     </php>

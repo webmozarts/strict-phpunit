@@ -29,5 +29,6 @@ $config = new LibraryConfig(
         file that was distributed with this source code.
         EOF,
 );
+$config->setCacheFile(__DIR__.'/dist/.php-cs-fixer.cache');
 
 return $config->setFinder($finder);

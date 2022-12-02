@@ -11,7 +11,7 @@
         findUnusedPsalmSuppress="true"
         ensureArrayStringOffsetsExist="true"
         ensureArrayIntOffsetsExist="true"
-        cacheDirectory=".psalm">
+        cacheDirectory="dist/.psalm">
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
