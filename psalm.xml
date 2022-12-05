@@ -28,6 +28,7 @@
                 <file name="tests/StrictScalarComparatorTest.php"/>
             </errorLevel>
         </MissingParamType>
+
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <file name="src/StrictScalarComparator.php"/>
