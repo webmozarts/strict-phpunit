@@ -1,0 +1,8 @@
+dist export-ignore
+tests export-ignore
+.gitlab-ci.yml export-ignore
+.php-cs-fixer.dist.php export-ignore
+infection.json.dist export-ignore
+Makefile export-ignore
+phpunit.xml.dist export-ignore
+psalm.xml export-ignore
