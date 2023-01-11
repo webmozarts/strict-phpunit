@@ -6,9 +6,6 @@
             "src"
         ]
     },
-    "logs": {
-        "text": "php://stdout"
-    },
     "tmpDir": "dist/infection",
     "mutators": {
         "@default": true,
