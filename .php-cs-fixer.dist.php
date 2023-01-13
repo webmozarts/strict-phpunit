@@ -16,7 +16,7 @@ use Webmozarts\CodeStyle\LibraryConfig;
 
 $finder = Finder::create()
     ->in(__DIR__)
-    ->exclude(['vendor'])
+    ->exclude(['dist', 'vendor'])
     ->ignoreDotFiles(false);
 
 $config = new LibraryConfig(
