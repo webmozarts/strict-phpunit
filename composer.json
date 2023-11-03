@@ -36,5 +36,10 @@
             "gitlab.webmozarts.com"
         ],
         "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "require": "6.*.*"
+        }
     }
 }

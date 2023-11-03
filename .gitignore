@@ -5,7 +5,6 @@
 /.php_cs.cache
 /.phpunit.result.cache
 /.psalm/
-/composer.lock
 /dist/
 /infection.log
 /vendor/
