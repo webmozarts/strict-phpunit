@@ -11,7 +11,7 @@
     </php>
 
     <extensions>
-        <extension class="Webmozarts\StrictPHPUnit\StrictPHPUnitExtension"/>
+        <bootstrap class="Webmozarts\StrictPHPUnit\StrictPHPUnitExtension"/>
     </extensions>
 
     <testsuites>
@@ -20,9 +20,9 @@
         </testsuite>
     </testsuites>
 
-    <coverage>
+    <source>
         <include>
             <directory>src</directory>
         </include>
-    </coverage>
+    </source>
 </phpunit>

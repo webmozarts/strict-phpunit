@@ -175,7 +175,7 @@ final class StrictScalarComparatorTest extends TestCase
      * @param mixed $expected
      * @param mixed $actual
      */
-    public function test_it_fails_if_scalar_values_are_identical($expected, $actual, bool $ignoreCase = true): void
+    public function test_it_fails_if_scalar_values_are_not_identical($expected, $actual, bool $ignoreCase = true): void
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
 
