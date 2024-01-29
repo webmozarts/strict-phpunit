@@ -81,7 +81,7 @@ final class StrictScalarComparator extends ScalarComparator
     /**
      * @throws ComparisonFailure
      */
-    public function failComparison(
+    private function failComparison(
         mixed $expected,
         mixed $actual,
         bool $diff,

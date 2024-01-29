@@ -9,6 +9,11 @@
     "tmpDir": "dist/infection",
     "mutators": {
         "@default": true,
+        "CastString": {
+            ignoreSourceCodeByRegex: [
+                "\\(string\\) InstalledVersions"
+            ],
+        },
         "MBString": false,
         "FalseValue": {
             "ignore": [
