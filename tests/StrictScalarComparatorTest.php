@@ -166,7 +166,7 @@ final class StrictScalarComparatorTest extends TestCase
 
         yield 'false and true' => [false, true];
 
-        yield '0 and 0.' => [0, 0.];
+        yield '0 integer and 0. float' => [0, 0.];
     }
 
     /**
@@ -197,6 +197,40 @@ final class StrictScalarComparatorTest extends TestCase
         $this->expectException(ComparisonFailure::class);
 
         $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
+    }
+
+    public static function equalValueWithDeltaProvider(): iterable
+    {
+        yield 'strings' => ['foo', 'foo', 0.];
+
+        yield 'strings with delta' => ['foo', 'foo', 1.];
+
+        yield 'integers' => [12, 12];
+
+        yield 'integers with delta' => [12, 13, 2.];
+
+        yield 'integers with delta at the limit' => [12, 14, 2.];
+
+        yield 'floats' => [12.5, 12.5];
+
+        yield 'floats with delta' => [12.5, 13.5, 2.];
+
+        yield 'floats with delta at the limit' => [12.5, 14.5, 2.];
+    }
+
+    /**
+     * @dataProvider equalValueWithDeltaProvider
+     *
+     * @param mixed $expected
+     * @param mixed $actual
+     */
+    public function test_it_succeeds_if_scalar_values_are_equal_with_delta($expected, $actual, float $delta = 0.): void
+    {
+        self::assertTrue($this->comparator->accepts($expected, $actual));
+        self::assertTrue($this->comparator->accepts($actual, $expected));
+
+        $this->comparator->assertEquals($expected, $actual, $delta);
+        $this->comparator->assertEquals($actual, $expected, $delta);
     }
 
     public static function notAcceptableValuesProvider(): iterable

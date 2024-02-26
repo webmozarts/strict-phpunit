@@ -18,6 +18,9 @@ use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Comparator\ScalarComparator;
 use SebastianBergmann\Exporter\Exporter;
 
+use function abs;
+use function gettype;
+use function is_numeric;
 use function is_string;
 use function mb_strtolower;
 use function sprintf;
@@ -61,6 +64,10 @@ final class StrictScalarComparator extends ScalarComparator
             return;
         }
 
+        if (self::isEqualNumericWithDelta($expectedToCompare, $actualToCompare, $delta)) {
+            return;
+        }
+
         if (is_string($expected) && is_string($actual)) {
             $this->failComparison(
                 $expected,
@@ -76,6 +83,17 @@ final class StrictScalarComparator extends ScalarComparator
             false,
             'Failed asserting that %2$s matches expected %1$s.',
         );
+    }
+
+    private static function isEqualNumericWithDelta(mixed $expected, mixed $actual, float $delta): bool
+    {
+        if (!is_numeric($expected)
+            || gettype($expected) !== gettype($actual)
+        ) {
+            return false;
+        }
+
+        return abs($expected - $actual) <= $delta;
     }
 
     /**
