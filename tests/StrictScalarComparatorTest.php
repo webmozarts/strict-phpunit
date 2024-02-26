@@ -18,9 +18,12 @@ use SebastianBergmann\Comparator\ComparisonFailure;
 use stdClass;
 use Webmozarts\StrictPHPUnit\StrictScalarComparator;
 
+use function acos;
 use function fclose;
 use function fopen;
 use function is_resource;
+
+use const INF;
 
 /**
  * @covers \Webmozarts\StrictPHPUnit\StrictScalarComparator
@@ -65,6 +68,18 @@ final class StrictScalarComparatorTest extends TestCase
         yield 'zero floats' => [0., 0.];
 
         yield 'floats' => [1.234, 1.234];
+
+        // See https://github.com/sebastianbergmann/comparator/blob/main/tests/NumericComparatorTest.php#L61
+        // A few were removed as the original comparator does a cast which is precisely what we do not want
+        // to do here.
+        yield [1337, 1337];
+        yield [0x539, 1337];
+        yield [0o2471, 1337];
+        yield [INF, INF];
+        yield [2.3, 2.3];
+        yield [1.2e3, 1200.];
+        yield [5.5E+123, 5.5E+123];
+        yield [5.5E-123, 5.5E-123];
     }
 
     /**
@@ -78,8 +93,8 @@ final class StrictScalarComparatorTest extends TestCase
         self::assertTrue($this->comparator->accepts($expected, $actual));
         self::assertTrue($this->comparator->accepts($actual, $expected));
 
-        $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
-        $this->comparator->assertEquals($actual, $expected, 0.0, false, $ignoreCase);
+        $this->comparator->assertEquals($expected, $actual, ignoreCase: $ignoreCase);
+        $this->comparator->assertEquals($actual, $expected, ignoreCase: $ignoreCase);
     }
 
     public static function nonIdenticalValueProvider(): iterable
@@ -196,7 +211,7 @@ final class StrictScalarComparatorTest extends TestCase
 
         $this->expectException(ComparisonFailure::class);
 
-        $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
+        $this->comparator->assertEquals($expected, $actual, ignoreCase: $ignoreCase);
     }
 
     public static function equalValueWithDeltaProvider(): iterable
@@ -209,13 +224,27 @@ final class StrictScalarComparatorTest extends TestCase
 
         yield 'integers with delta' => [12, 13, 2.];
 
-        yield 'integers with delta at the limit' => [12, 14, 2.];
+        yield 'integers with delta at the lower limit' => [12, 10, 2.];
+
+        yield 'integers with delta at the upper limit' => [12, 14, 2.];
 
         yield 'floats' => [12.5, 12.5];
 
         yield 'floats with delta' => [12.5, 13.5, 2.];
 
         yield 'floats with delta at the limit' => [12.5, 14.5, 2.];
+
+        // See https://github.com/sebastianbergmann/comparator/blob/main/tests/NumericComparatorTest.php#L61
+        // A few were commented as the original comparator does a cast which is precisely what we do not want
+        // to do here.
+        yield [1337, 1338, 1];
+        yield [2.3, 2.5, 0.5];
+        yield [3., 3.05, 0.05];
+        yield [1.2e3, 1201., 1];
+        /** @psalm-suppress InvalidOperand */
+        yield [1 / 3, 1 - 2 / 3, 0.0000000001];
+        yield [5.5E+123, 5.6E+123, 0.2E+123];
+        yield [5.5E-123, 5.6E-123, 0.2E-123];
     }
 
     /**
@@ -231,6 +260,70 @@ final class StrictScalarComparatorTest extends TestCase
 
         $this->comparator->assertEquals($expected, $actual, $delta);
         $this->comparator->assertEquals($actual, $expected, $delta);
+    }
+
+    public static function notEqualValueWithDeltaProvider(): iterable
+    {
+        yield 'integers' => [12, 13];
+
+        yield 'integers with delta' => [12, 20, 2.];
+
+        yield 'integers with delta at the lower limit' => [12, 9, 2.];
+
+        yield 'integers with delta at the upper limit' => [12, 15, 2.];
+
+        yield 'floats' => [12.5, 12.4];
+
+        yield 'floats with delta' => [12.5, 15.1, 2.];
+
+        // See https://github.com/sebastianbergmann/comparator/blob/main/tests/NumericComparatorTest.php#L90
+        yield [1337, 1338];
+        yield ['1338', 1337];
+        yield [0x539, 1338];
+        yield [1337, 1339, 1];
+        yield ['1337', 1340, 2];
+        yield [2.3, 4.2];
+        yield ['2.3', 4.2];
+        yield [5.0, '4'];
+        yield [5.0, 6];
+        yield [1.2e3, 1201];
+        yield [2.3, 2.5, 0.2];
+        yield [3, 3.05, 0.04];
+        yield [3, acos(8)];
+        yield [acos(8), 3];
+        yield [acos(8), acos(8)];
+        /** @psalm-suppress InvalidOperand */
+        yield [1 / 3, 1 - 2 / 3];
+        yield [5.5E+123, '5.7E+123'];
+        yield [5.5E-123, '5.7E-123'];
+        yield [5.5E+123, '5.7E+123', 0.1E+123];
+        yield [5.5E-123, '5.7E-123', 0.1E-123];
+    }
+
+    /**
+     * @dataProvider notEqualValueWithDeltaProvider
+     */
+    public function test_it_fails_if_scalar_values_are_not_equal_with_delta(
+        mixed $expected,
+        mixed $actual,
+        float $delta = 0.,
+    ): void {
+        $this->assertCompactorAcceptsAndNotEqual($expected, $actual, $delta);
+        $this->assertCompactorAcceptsAndNotEqual($actual, $expected, $delta);
+    }
+
+    private function assertCompactorAcceptsAndNotEqual(mixed $expected, mixed $actual, float $delta): void
+    {
+        self::assertTrue($this->comparator->accepts($expected, $actual));
+
+        try {
+            $this->comparator->assertEquals($expected, $actual, $delta);
+
+            self::fail('Expected an exception to be thrown.');
+        } catch (ComparisonFailure) {
+            /** @psalm-suppress InternalMethod */
+            $this->addToAssertionCount(1);
+        }
     }
 
     public static function notAcceptableValuesProvider(): iterable
