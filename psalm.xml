@@ -34,6 +34,13 @@
             </errorLevel>
         </MissingParamType>
 
+        <PossiblyUnusedMethod>
+            <!-- This is for the PHPUnit data providers; see https://github.com/psalm/psalm-plugin-phpunit/issues/131 -->
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <file name="src/StrictScalarComparator.php"/>

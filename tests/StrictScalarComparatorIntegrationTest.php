@@ -14,18 +14,17 @@ declare(strict_types=1);
 namespace Webmozarts\StrictPHPUnit\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversNothing
- *
  * @internal
  */
+#[CoversNothing]
 final class StrictScalarComparatorIntegrationTest extends TestCase
 {
-    /**
-     * @dataProvider \Webmozarts\StrictPHPUnit\Tests\StrictScalarComparatorTest::identicalValueProvider
-     */
+    #[DataProviderExternal(StrictScalarComparatorTest::class, 'identicalValueProvider')]
     public function test_it_succeeds_if_scalar_values_are_identical(
         mixed $expected,
         mixed $actual,
@@ -38,9 +37,7 @@ final class StrictScalarComparatorIntegrationTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider \Webmozarts\StrictPHPUnit\Tests\StrictScalarComparatorTest::nonIdenticalValueProvider
-     */
+    #[DataProviderExternal(StrictScalarComparatorTest::class, 'nonIdenticalValueProvider')]
     public function test_it_fails_if_scalar_values_are_not_identical(
         mixed $expected,
         mixed $actual,

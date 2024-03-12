@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit\Tests;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use stdClass;
@@ -26,10 +28,9 @@ use function is_resource;
 use const INF;
 
 /**
- * @covers \Webmozarts\StrictPHPUnit\StrictScalarComparator
- *
  * @internal
  */
+#[CoversClass(StrictScalarComparator::class)]
 final class StrictScalarComparatorTest extends TestCase
 {
     /**
@@ -83,11 +84,10 @@ final class StrictScalarComparatorTest extends TestCase
     }
 
     /**
-     * @dataProvider identicalValueProvider
-     *
      * @param mixed $expected
      * @param mixed $actual
      */
+    #[DataProvider('identicalValueProvider')]
     public function test_it_succeeds_if_scalar_values_are_identical($expected, $actual, bool $ignoreCase = false): void
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
@@ -185,11 +185,10 @@ final class StrictScalarComparatorTest extends TestCase
     }
 
     /**
-     * @dataProvider nonIdenticalValueProvider
-     *
      * @param mixed $expected
      * @param mixed $actual
      */
+    #[DataProvider('nonIdenticalValueProvider')]
     public function test_it_fails_if_scalar_values_are_not_identical($expected, $actual, bool $ignoreCase = true): void
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
@@ -200,11 +199,10 @@ final class StrictScalarComparatorTest extends TestCase
     }
 
     /**
-     * @dataProvider nonIdenticalValueProvider
-     *
      * @param mixed $actual
      * @param mixed $expected
      */
+    #[DataProvider('nonIdenticalValueProvider')]
     public function test_it_fails_if_scalar_values_are_identical_reverse($actual, $expected, bool $ignoreCase = true): void
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
@@ -248,11 +246,10 @@ final class StrictScalarComparatorTest extends TestCase
     }
 
     /**
-     * @dataProvider equalValueWithDeltaProvider
-     *
      * @param mixed $expected
      * @param mixed $actual
      */
+    #[DataProvider('equalValueWithDeltaProvider')]
     public function test_it_succeeds_if_scalar_values_are_equal_with_delta($expected, $actual, float $delta = 0.): void
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
@@ -300,9 +297,7 @@ final class StrictScalarComparatorTest extends TestCase
         yield [5.5E-123, '5.7E-123', 0.1E-123];
     }
 
-    /**
-     * @dataProvider notEqualValueWithDeltaProvider
-     */
+    #[DataProvider('notEqualValueWithDeltaProvider')]
     public function test_it_fails_if_scalar_values_are_not_equal_with_delta(
         mixed $expected,
         mixed $actual,
@@ -340,10 +335,9 @@ final class StrictScalarComparatorTest extends TestCase
     }
 
     /**
-     * @dataProvider notAcceptableValuesProvider
-     *
      * @param mixed $value
      */
+    #[DataProvider('notAcceptableValuesProvider')]
     public function test_it_does_not_accept_non_scalar_values($value): void
     {
         self::assertFalse($this->comparator->accepts($value, $value));
