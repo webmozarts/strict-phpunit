@@ -83,13 +83,12 @@ final class StrictScalarComparatorTest extends TestCase
         yield [5.5E-123, 5.5E-123];
     }
 
-    /**
-     * @param mixed $expected
-     * @param mixed $actual
-     */
     #[DataProvider('identicalValueProvider')]
-    public function test_it_succeeds_if_scalar_values_are_identical($expected, $actual, bool $ignoreCase = false): void
-    {
+    public function test_it_succeeds_if_scalar_values_are_identical(
+        mixed $expected,
+        mixed $actual,
+        bool $ignoreCase = false,
+    ): void {
         self::assertTrue($this->comparator->accepts($expected, $actual));
         self::assertTrue($this->comparator->accepts($actual, $expected));
 
@@ -184,27 +183,25 @@ final class StrictScalarComparatorTest extends TestCase
         yield '0 integer and 0. float' => [0, 0.];
     }
 
-    /**
-     * @param mixed $expected
-     * @param mixed $actual
-     */
     #[DataProvider('nonIdenticalValueProvider')]
-    public function test_it_fails_if_scalar_values_are_not_identical($expected, $actual, bool $ignoreCase = true): void
-    {
+    public function test_it_fails_if_scalar_values_are_not_identical(
+        mixed $expected,
+        mixed $actual,
+        bool $ignoreCase = true,
+    ): void {
         self::assertTrue($this->comparator->accepts($expected, $actual));
 
         $this->expectException(ComparisonFailure::class);
 
-        $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
+        $this->comparator->assertEquals($expected, $actual, ignoreCase: $ignoreCase);
     }
 
-    /**
-     * @param mixed $actual
-     * @param mixed $expected
-     */
     #[DataProvider('nonIdenticalValueProvider')]
-    public function test_it_fails_if_scalar_values_are_identical_reverse($actual, $expected, bool $ignoreCase = true): void
-    {
+    public function test_it_fails_if_scalar_values_are_identical_reverse(
+        mixed $actual,
+        mixed $expected,
+        bool $ignoreCase = true,
+    ): void {
         self::assertTrue($this->comparator->accepts($expected, $actual));
 
         $this->expectException(ComparisonFailure::class);
