@@ -20,7 +20,8 @@ use SebastianBergmann\Exporter\Exporter;
 
 use function abs;
 use function gettype;
-use function is_numeric;
+use function is_float;
+use function is_int;
 use function is_string;
 use function mb_strtolower;
 use function sprintf;
@@ -64,11 +65,20 @@ final class StrictScalarComparator extends ScalarComparator
             return;
         }
 
+        if (gettype($expectedToCompare) !== gettype($actualToCompare)) {
+            $this->failComparison(
+                $expected,
+                $actual,
+                false,
+                'Failed asserting that %2$s matches expected %1$s.',
+            );
+        }
+
         if (self::isEqualNumericWithDelta($expectedToCompare, $actualToCompare, $delta)) {
             return;
         }
 
-        if (is_string($expected) && is_string($actual)) {
+        if (is_string($expected)) {
             $this->failComparison(
                 $expected,
                 $actual,
@@ -85,11 +95,15 @@ final class StrictScalarComparator extends ScalarComparator
         );
     }
 
+    /**
+     * @template T
+     *
+     * @param T $expected
+     * @param T $actual
+     */
     private static function isEqualNumericWithDelta(mixed $expected, mixed $actual, float $delta): bool
     {
-        if (!is_numeric($expected)
-            || gettype($expected) !== gettype($actual)
-        ) {
+        if (!is_int($expected) && !is_float($expected)) {
             return false;
         }
 

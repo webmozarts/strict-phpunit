@@ -124,6 +124,8 @@ final class StrictScalarComparatorTest extends TestCase
 
         yield '"1" string and 1' => ['1', 1];
 
+        yield 'two different numeric strings' => ['1', '2'];
+
         yield '"1" string and 1.' => ['1', 1.];
 
         yield '"1" string and false' => ['1', false];
@@ -181,6 +183,8 @@ final class StrictScalarComparatorTest extends TestCase
         yield 'false and true' => [false, true];
 
         yield '0 integer and 0. float' => [0, 0.];
+
+        yield 'integer with float' => [12, 12.];
     }
 
     #[DataProvider('nonIdenticalValueProvider')]
@@ -216,6 +220,8 @@ final class StrictScalarComparatorTest extends TestCase
         yield 'strings with delta' => ['foo', 'foo', 1.];
 
         yield 'integers' => [12, 12];
+
+        yield 'string integers' => ['12', '12'];
 
         yield 'integers with delta' => [12, 13, 2.];
 
@@ -262,6 +268,8 @@ final class StrictScalarComparatorTest extends TestCase
 
         yield 'integers with delta' => [12, 20, 2.];
 
+        yield 'string integers with delta' => ['12', '13', 2.];
+
         yield 'integers with delta at the lower limit' => [12, 9, 2.];
 
         yield 'integers with delta at the upper limit' => [12, 15, 2.];
@@ -269,6 +277,8 @@ final class StrictScalarComparatorTest extends TestCase
         yield 'floats' => [12.5, 12.4];
 
         yield 'floats with delta' => [12.5, 15.1, 2.];
+
+        yield 'integer with float with delta' => [12, 13.5, 2.];
 
         // See https://github.com/sebastianbergmann/comparator/blob/main/tests/NumericComparatorTest.php#L90
         yield [1337, 1338];
