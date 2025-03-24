@@ -11,12 +11,9 @@
 
 declare(strict_types=1);
 
-use Rector\Config\RectorConfig;
+use Rector\Configuration\RectorConfigBuilder;
 
-$applyBaseConfig = require __DIR__.'/../../base-rector-config.php';
+/** @var callable(string):RectorConfigBuilder $createConfig */
+$createConfig = require __DIR__.'/../../create-base-rector-config.php';
 
-return static function (RectorConfig $rectorConfig) use ($applyBaseConfig): void {
-    $applyBaseConfig($rectorConfig, __DIR__);
-
-    // Library specific config here.
-};
+return $createConfig(__DIR__);
