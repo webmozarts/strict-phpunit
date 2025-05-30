@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Webmozarts\StrictPHPUnit;
 
 use Composer\InstalledVersions;
+use Override;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Comparator\ScalarComparator;
 use SebastianBergmann\Exporter\Exporter;
@@ -43,6 +44,7 @@ final class StrictScalarComparator extends ScalarComparator
      * @param bool  $canonicalize
      * @param bool  $ignoreCase
      */
+    #[Override]
     public function assertEquals(
         $expected,
         $actual,
