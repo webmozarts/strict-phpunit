@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit;
 
-use Composer\InstalledVersions;
 use Override;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Comparator\ScalarComparator;
@@ -26,7 +25,6 @@ use function is_int;
 use function is_string;
 use function mb_strtolower;
 use function sprintf;
-use function str_starts_with;
 
 /**
  * A comparator that always compares scalar values in a type-safe way.
@@ -35,22 +33,13 @@ use function str_starts_with;
  */
 final class StrictScalarComparator extends ScalarComparator
 {
-    /**
-     * TODO: add types as PHPUnit 9 support is dropped.
-     *
-     * @param mixed $expected
-     * @param mixed $actual
-     * @param float $delta
-     * @param bool  $canonicalize
-     * @param bool  $ignoreCase
-     */
     #[Override]
     public function assertEquals(
-        $expected,
-        $actual,
-        $delta = 0.0,
-        $canonicalize = false,
-        $ignoreCase = false
+        mixed $expected,
+        mixed $actual,
+        float $delta = 0.0,
+        bool $canonicalize = false,
+        bool $ignoreCase = false
     ): void {
         $expectedToCompare = $expected;
         $actualToCompare = $actual;
@@ -125,22 +114,6 @@ final class StrictScalarComparator extends ScalarComparator
         $expectedAsString = $exporter->export($expected);
         $actualAsString = $exporter->export($actual);
 
-        if (self::isPhpUnit9()) {
-            /** @psalm-suppress InvalidArgument,TooManyArguments */
-            throw new ComparisonFailure(
-                $expected,
-                $actual,
-                $diff ? $expectedAsString : '',
-                $diff ? $actualAsString : '',
-                false,
-                sprintf(
-                    $message,
-                    $expectedAsString,
-                    $actualAsString,
-                ),
-            );
-        }
-
         throw new ComparisonFailure(
             $expected,
             $actual,
@@ -152,21 +125,5 @@ final class StrictScalarComparator extends ScalarComparator
                 $actualAsString,
             ),
         );
-    }
-
-    private static function isPhpUnit9(): bool
-    {
-        static $phpunit9;
-
-        if (isset($phpunit9)) {
-            return $phpunit9;
-        }
-
-        $phpunit9 = str_starts_with(
-            (string) InstalledVersions::getPrettyVersion('phpunit/phpunit'),
-            '9.',
-        );
-
-        return $phpunit9;
     }
 }

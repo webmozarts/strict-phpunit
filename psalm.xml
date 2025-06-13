@@ -21,10 +21,6 @@
     <projectFiles>
         <directory name="src"/>
         <directory name="tests"/>
-
-        <ignoreFiles>
-            <file name="src/StrictPHPUnit9Extension.php"/>
-        </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>

@@ -13,19 +13,15 @@ declare(strict_types=1);
 
 namespace Webmozarts\StrictPHPUnit;
 
-use Composer\InstalledVersions;
+use PHPUnit\Runner\Extension\Extension;
+use PHPUnit\Runner\Extension\Facade;
+use PHPUnit\Runner\Extension\ParameterCollection;
+use PHPUnit\TextUI\Configuration\Configuration;
 
-use function class_alias;
-use function version_compare;
-
-/** @psalm-suppress MissingDependency,UndefinedClass */
-class_alias(
-    (string) version_compare(
-        (string) InstalledVersions::getPrettyVersion('phpunit/phpunit'),
-        '10.0',
-        '>=',
-    )
-        ? StrictPHPUnit10Extension::class
-        : StrictPHPUnit9Extension::class,
-    StrictPHPUnitExtension::class,
-);
+final class StrictPHPUnitExtension implements Extension
+{
+    public function bootstrap(Configuration $configuration, Facade $facade, ParameterCollection $parameters): void
+    {
+        $facade->registerSubscriber(new RegisterStrictScalarComparatorSubscriber());
+    }
+}
