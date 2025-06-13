@@ -1,4 +1,5 @@
 !/dist/.gitkeep
+/.direnv/
 /.envrc.local
 /.idea/
 /.php-cs-fixer.cache
