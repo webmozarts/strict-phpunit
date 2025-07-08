@@ -248,13 +248,12 @@ final class StrictScalarComparatorTest extends TestCase
         yield [5.5E-123, 5.6E-123, 0.2E-123];
     }
 
-    /**
-     * @param mixed $expected
-     * @param mixed $actual
-     */
     #[DataProvider('equalValueWithDeltaProvider')]
-    public function test_it_succeeds_if_scalar_values_are_equal_with_delta($expected, $actual, float $delta = 0.): void
-    {
+    public function test_it_succeeds_if_scalar_values_are_equal_with_delta(
+        mixed $expected,
+        mixed $actual,
+        float $delta = 0.,
+    ): void {
         self::assertTrue($this->comparator->accepts($expected, $actual));
         self::assertTrue($this->comparator->accepts($actual, $expected));
 
@@ -341,11 +340,8 @@ final class StrictScalarComparatorTest extends TestCase
         yield 'resource' => [self::$resource];
     }
 
-    /**
-     * @param mixed $value
-     */
     #[DataProvider('notAcceptableValuesProvider')]
-    public function test_it_does_not_accept_non_scalar_values($value): void
+    public function test_it_does_not_accept_non_scalar_values(mixed $value): void
     {
         self::assertFalse($this->comparator->accepts($value, $value));
         self::assertFalse($this->comparator->accepts('scalar', $value));
