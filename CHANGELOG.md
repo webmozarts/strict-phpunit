@@ -1,4 +1,4 @@
-### 7.16.6
+### 7.16.2
 
 - Remove support for PHPUnit 9.
 
