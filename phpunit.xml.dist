@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
          failOnRisky="true"
          failOnWarning="true"
-         cacheDirectory="dist/phpunit-cache"
-         cacheResultFile="dist/.phpunit.result.cache">
+         failOnPhpunitDeprecation="true"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnIncompleteTests="true"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile="dist/phpunit-cache"
+         requireCoverageMetadata="true"
+         stopOnFailure="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+>
     <php>
         <ini name="error_reporting" value="-1"/>
     </php>
