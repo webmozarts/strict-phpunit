@@ -11,7 +11,7 @@
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnIncompleteTests="true"
          bootstrap="vendor/autoload.php"
-         cacheResultFile="dist/phpunit-cache"
+         cacheDirectory="dist/phpunit-cache"
          requireCoverageMetadata="true"
          stopOnFailure="true"
          beStrictAboutOutputDuringTests="true"
