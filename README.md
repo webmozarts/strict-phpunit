@@ -4,7 +4,7 @@ Enables type-safe comparisons of objects in PHPUnit.
 
 ## Problem
 
-PHPUnit has a very powerful comparison system that helps you comparing objects
+PHPUnit has a very powerful comparison system that helps you to compare objects
 with expected values:
 
 ```php
@@ -74,8 +74,8 @@ self::assertEquals(new ValueObject('foo!'), new ValueObject('foo!'));
 
 The extension can be installed with Composer:
 
-```bash
-$ composer require --dev webmozarts/strict-phpunit
+```shell
+composer require --dev webmozarts/strict-phpunit
 ```
 
 Add the extension to your `phpunit.xml.dist` file to enable it:
@@ -87,7 +87,7 @@ Add the extension to your `phpunit.xml.dist` file to enable it:
     <!-- ... -->
     
     <extensions>
-        <extension class="Webmozarts\StrictPHPUnit\StrictPHPUnitExtension"/>
+        <bootstrap class="Webmozarts\StrictPHPUnit\StrictPHPUnitExtension"/>
     </extensions>
     
     <!-- ... -->
