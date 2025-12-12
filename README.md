@@ -1,5 +1,8 @@
 # Strict PHPUnit
 
+> [!caution]
+> This repository is read-only. To submit any changes, check out [php-libraries].
+
 Enables type-safe comparisons of objects in PHPUnit.
 
 ## Problem
