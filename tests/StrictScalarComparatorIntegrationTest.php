@@ -43,17 +43,12 @@ final class StrictScalarComparatorIntegrationTest extends TestCase
         mixed $actual,
         bool $ignoreCase = true,
     ): void {
-        try {
-            if ($ignoreCase) {
-                self::assertEqualsIgnoringCase($expected, $actual);
-            } else {
-                self::assertEquals($expected, $actual);
-            }
+        $this->expectException(AssertionFailedError::class);
 
-            self::fail('Expected a comparison failure.');
-        } catch (AssertionFailedError) {
-            /** @psalm-suppress InternalMethod */
-            $this->addToAssertionCount(1);
+        if ($ignoreCase) {
+            self::assertEqualsIgnoringCase($expected, $actual);
+        } else {
+            self::assertEquals($expected, $actual);
         }
     }
 }

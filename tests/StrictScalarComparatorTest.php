@@ -317,14 +317,8 @@ final class StrictScalarComparatorTest extends TestCase
     {
         self::assertTrue($this->comparator->accepts($expected, $actual));
 
-        try {
-            $this->comparator->assertEquals($expected, $actual, $delta);
-
-            self::fail('Expected an exception to be thrown.');
-        } catch (ComparisonFailure) {
-            /** @psalm-suppress InternalMethod */
-            $this->addToAssertionCount(1);
-        }
+        $this->expectException(ComparisonFailure::class);
+        $this->comparator->assertEquals($expected, $actual, $delta);
     }
 
     public static function notAcceptableValuesProvider(): iterable
