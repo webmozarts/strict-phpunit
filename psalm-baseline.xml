@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
+  <file src="src/StrictScalarComparator.php">
+    <InternalClass>
+      <code>ScalarComparator</code>
+    </InternalClass>
+  </file>
+  <file src="tests/StrictScalarComparatorTest.php">
+    <InternalMethod>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+      <code>accepts</code>
+    </InternalMethod>
+  </file>
+</files>
