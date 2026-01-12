@@ -12,7 +12,7 @@
         ensureArrayStringOffsetsExist="true"
         ignoreInternalFunctionFalseReturn="false"
         ignoreInternalFunctionNullReturn="false"
-        strictBinaryOperands="true" errorBaseline="psalm-baseline.xml">
+        strictBinaryOperands="true">
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
