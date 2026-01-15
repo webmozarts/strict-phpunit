@@ -39,7 +39,7 @@
     },
     "extra": {
         "symfony": {
-            "require": "6.*.*"
+            "require": "7.*.*"
         }
     }
 }
