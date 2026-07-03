@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.28",
-        "infection/infection": "^0.28.1"
+        "infection/infection": "^0.29.12"
     },
     "autoload": {
         "psr-4": {
