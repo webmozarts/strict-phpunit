@@ -30,6 +30,8 @@ use function sprintf;
  * A comparator that always compares scalar values in a type-safe way.
  *
  * @internal
+ *
+ * @psalm-suppress InternalClass
  */
 final class StrictScalarComparator extends ScalarComparator
 {

@@ -29,6 +29,8 @@ use const INF;
 
 /**
  * @internal
+ *
+ * @psalm-suppress InternalMethod
  */
 #[CoversClass(StrictScalarComparator::class)]
 final class StrictScalarComparatorTest extends TestCase
